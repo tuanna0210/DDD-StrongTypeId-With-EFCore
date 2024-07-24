@@ -12,6 +12,8 @@ namespace Demo.Persistence.Configurations
             builder.Property(c => c.Id)
                 .HasConversion(id => id.Value, did => MenuId.Of(did));
 
+            builder.OwnsOne(m => m.AverageRating);
+
             builder.HasMany(m => m.Customers)
                 .WithOne();
         }

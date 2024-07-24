@@ -8,8 +8,8 @@ Console.WriteLine("Hello, World!");
 
 using (var context = new MyDbContext())
 {
-    CreateMenu(context);
-    //GetMenu(Guid.Parse("1decbdde-f144-44c7-bb3f-a122b2e86277"), context);
+    //CreateMenu(context);
+    GetMenu(Guid.Parse("3180b64f-b15a-481b-9e4a-1624a053d6e1"), context);
 }
 
 
@@ -26,6 +26,7 @@ void CreateMenu(MyDbContext context)
     {
         Id = MenuId.Of(Guid.NewGuid()),
         Name = "First Menu",
+        AverageRating = AverageRating.Of(4.5, 100),
         Customers = new List<Customer>()
         {
             new Customer()

@@ -6,6 +6,7 @@ namespace Demo.Domain
     {
         public MenuId Id { get; set; }
         public string Name { get; set; }
+        public AverageRating AverageRating { get; set; }
         public List<Customer> Customers { get; set; }
     }
 }
