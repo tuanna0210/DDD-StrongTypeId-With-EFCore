@@ -10,6 +10,10 @@ namespace Demo.Domain.MenuAggregate.ValueObjects
             Value = value;
         }
 
+        public static MenuId CreateUnique()
+        {
+            return new(Guid.NewGuid());
+        }
         public static MenuId Of(Guid value)
         {
             return new MenuId(value);
