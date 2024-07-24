@@ -1,0 +1,1 @@
+# DDD StrongTypedId With EFCore
