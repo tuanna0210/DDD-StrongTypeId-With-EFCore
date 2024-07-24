@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Demo.Domain;
-using Demo.Domain.ValueObjects;
+using Demo.Domain.MenuAggregate;
+using Demo.Domain.MenuAggregate.Entities;
+using Demo.Domain.MenuAggregate.ValueObjects;
 using Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,16 +11,26 @@ Console.WriteLine("Hello, World!");
 using (var context = new MyDbContext())
 {
     //CreateMenu(context);
-    GetMenu(Guid.Parse("3180b64f-b15a-481b-9e4a-1624a053d6e1"), context);
+    //GetMenu(Guid.Parse("15536564-6a79-4708-8907-fd1468e5cf16"), context);
+    DeleteMenu(Guid.Parse("15536564-6a79-4708-8907-fd1468e5cf16"), context);
 }
 
 
-void GetMenu(Guid id, MyDbContext context)
+Menu GetMenu(Guid id, MyDbContext context)
 {
     var menu = context.Menus
         .Include(m => m.Customers)
         .Where(m => m.Id == MenuId.Of(id))
         .FirstOrDefault();
+    return menu;
+}
+
+void DeleteMenu(Guid id, MyDbContext context)
+{
+    //context.Menus.Where(m => m.Id == MenuId.Of(id)).ExecuteDelete();
+    var menu = GetMenu(id, context);
+    context.Menus.Remove(menu);
+    context.SaveChanges();
 }
 void CreateMenu(MyDbContext context)
 {
@@ -41,6 +53,9 @@ void CreateMenu(MyDbContext context)
             }
         }
     };
+
+    menu.AddSection(MenuSectionId.Of(Guid.NewGuid()), "Main Course", "Main Course");
+    menu.AddSection(MenuSectionId.Of(Guid.NewGuid()), "Appetizers", "Appetizers");
 
     context.Menus.Add(menu);
     context.SaveChanges();

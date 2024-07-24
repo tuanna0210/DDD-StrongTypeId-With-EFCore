@@ -1,6 +1,6 @@
 ﻿using Demo.Domain.Abstractions;
 
-namespace Demo.Domain.ValueObjects
+namespace Demo.Domain.MenuAggregate.ValueObjects
 {
     public class MenuId : ValueObject
     {

@@ -1,4 +1,4 @@
-﻿using Demo.Domain.ValueObjects;
+﻿using Demo.Domain.MenuAggregate.ValueObjects;
 
 namespace Demo.Domain;
 

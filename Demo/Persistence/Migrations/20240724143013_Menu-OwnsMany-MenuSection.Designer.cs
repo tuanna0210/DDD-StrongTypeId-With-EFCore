@@ -4,6 +4,7 @@ using Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.Persistence.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240724143013_Menu-OwnsMany-MenuSection")]
+    partial class MenuOwnsManyMenuSection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,8 +63,7 @@ namespace Demo.Persistence.Migrations
                 {
                     b.HasOne("Demo.Domain.MenuAggregate.Menu", null)
                         .WithMany("Customers")
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("MenuId");
                 });
 
             modelBuilder.Entity("Demo.Domain.MenuAggregate.Menu", b =>

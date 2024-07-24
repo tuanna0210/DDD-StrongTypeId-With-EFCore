@@ -1,5 +1,5 @@
-﻿using Demo.Domain;
-using Demo.Domain.ValueObjects;
+﻿using Demo.Domain.MenuAggregate;
+using Demo.Domain.MenuAggregate.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,8 +14,28 @@ namespace Demo.Persistence.Configurations
 
             builder.OwnsOne(m => m.AverageRating);
 
+            builder.OwnsMany(m => m.Sections, sectionBuilder =>
+            {
+                sectionBuilder.ToTable("MenuSections");
+
+                sectionBuilder.Property(m => m.Id)
+                    .ValueGeneratedNever()
+                    .HasConversion(
+                        id => id.Value,
+                        value => MenuSectionId.Of(value)
+                    );
+                sectionBuilder
+                    .Property(s => s.Name)
+                    .HasMaxLength(100);
+
+                sectionBuilder
+                    .Property(s => s.Description)
+                    .HasMaxLength(100);
+            });
+
             builder.HasMany(m => m.Customers)
-                .WithOne();
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

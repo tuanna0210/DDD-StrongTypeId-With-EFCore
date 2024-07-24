@@ -1,5 +1,5 @@
 ﻿using Demo.Domain;
-using Demo.Domain.ValueObjects;
+using Demo.Domain.MenuAggregate.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

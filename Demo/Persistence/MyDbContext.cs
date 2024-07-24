@@ -1,4 +1,5 @@
 ﻿using Demo.Domain;
+using Demo.Domain.MenuAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.Persistence;
